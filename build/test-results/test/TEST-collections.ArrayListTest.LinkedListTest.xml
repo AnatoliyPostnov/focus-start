@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="collections.ArrayListTest.LinkedListTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2019-11-22T06:29:08" hostname="Анатолий-ПК" time="0.038">
+  <properties/>
+  <testcase name="removeElementTest" classname="collections.ArrayListTest.LinkedListTest" time="0.033"/>
+  <testcase name="addElementAtBeginTest" classname="collections.ArrayListTest.LinkedListTest" time="0.0"/>
+  <testcase name="addEightElementTest" classname="collections.ArrayListTest.LinkedListTest" time="0.0"/>
+  <testcase name="removeElementAtEndTest" classname="collections.ArrayListTest.LinkedListTest" time="0.0"/>
+  <testcase name="getElementTest" classname="collections.ArrayListTest.LinkedListTest" time="0.0"/>
+  <testcase name="addElementInCenterTest" classname="collections.ArrayListTest.LinkedListTest" time="0.0"/>
+  <testcase name="addElementAtAndTest" classname="collections.ArrayListTest.LinkedListTest" time="0.0"/>
+  <testcase name="removeElementAtBeginTest" classname="collections.ArrayListTest.LinkedListTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
