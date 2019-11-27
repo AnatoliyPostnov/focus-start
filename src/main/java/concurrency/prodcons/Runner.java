@@ -1,5 +1,7 @@
 package concurrency.prodcons;
 
+import java.util.concurrent.Semaphore;
+
 public class Runner {
     public static void main(String[] args) throws InterruptedException {
         ProducerConsumer producerConsumer = new ProducerConsumer();
@@ -13,17 +15,14 @@ public class Runner {
         });
 
 
-    Thread runner2 = new Thread(new Runnable() {
-        @Override
-        public void run() {
+        Thread runner2 = new Thread(() -> {
             Thread.currentThread().setName("consumer");
             try {
                 producerConsumer.consume();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
-    });
+        });
 
 
         runner1.start();
