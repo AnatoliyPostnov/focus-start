@@ -1,23 +1,28 @@
 package mocks.crud.task.service;
 
-import mocks.crud.task.MyExceptions.AddressWasNotFound;
-import mocks.crud.task.MyExceptions.UpdateAddressWasNotFound;
+import mocks.crud.task.exceptions.AddressWasNotFound;
+import mocks.crud.task.exceptions.UpdateAddressWasNotFound;
 import mocks.crud.task.model.Address;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.*;
 
 public class AddressServiceTest {
 
     private AddressService addressService;
+    private Address address1;
+    private Address address2;
+    private Address address3;
 
     @Before
     public void init(){
         addressService = new AddressService();
-        Address address1 = new Address((long) 1, "address1");
-        Address address2 = new Address((long) 2, "address2");
-        Address address3 = new Address((long) 3, "address3");
+        address1 = new Address((long) 1, "address1");
+        address2 = new Address((long) 2, "address2");
+        address3 = new Address((long) 3, "address3");
         addressService.save(address1);
         addressService.save(address2);
         addressService.save(address3);
@@ -33,14 +38,7 @@ public class AddressServiceTest {
         addressService.save(address5);
         addressService.save(address6);
 
-        String test = "1 address1" + " 2 address2" + " 3 address3" +
-                " 4 address4" + " 5 address5" + " 6 address6 ";
-        String result = "";
-
-        for (Address address : addressService.findAll()){
-            result += address.getId() + " " + address.getAddress() + " ";
-        }
-        assertEquals(test, result);
+        assertThat(addressService.getAddresses(), hasItems(address1, address2, address3, address4, address5, address6));
     }
 
     @Test
@@ -67,39 +65,21 @@ public class AddressServiceTest {
     public void updateCentralElementTest(){
         Address addressUpdate = new Address((long) 2, "address update");
         addressService.update(addressUpdate);
-        String test = "1 address1" + " 2 address update" + " 3 address3 ";
-        String result = "";
-
-        for (Address address : addressService.findAll()){
-            result += address.getId() + " " + address.getAddress() + " ";
-        }
-        assertEquals(test, result);
+        assertThat(addressService.getAddresses(), contains(address1, addressUpdate, address3));
     }
 
     @Test
     public void updateFirstElementTest(){
         Address addressUpdate = new Address((long) 1, "address update");
         addressService.update(addressUpdate);
-        String test = "1 address update" + " 2 address2" + " 3 address3 ";
-        String result = "";
-
-        for (Address address : addressService.findAll()){
-            result += address.getId() + " " + address.getAddress() + " ";
-        }
-        assertEquals(test, result);
+        assertThat(addressService.getAddresses(), contains( addressUpdate, address2, address3));
     }
 
     @Test
     public void updateLastElementTest(){
         Address addressUpdate = new Address((long) 3, "address update");
         addressService.update(addressUpdate);
-        String test = "1 address1" + " 2 address2" + " 3 address update ";
-        String result = "";
-
-        for (Address address : addressService.findAll()){
-            result += address.getId() + " " + address.getAddress() + " ";
-        }
-        assertEquals(test, result);
+        assertThat(addressService.getAddresses(), contains(address1, address2,  addressUpdate));
     }
 
     @Test(expected = UpdateAddressWasNotFound.class)
@@ -118,39 +98,21 @@ public class AddressServiceTest {
     public void deleteFirstElementTest(){
         Address addressDelete = new Address((long) 1, "address1");
         addressService.delete(addressDelete);
-        String test = "2 address2" + " 3 address3 ";
-        String result = "";
-
-        for (Address address : addressService.findAll()){
-            result += address.getId() + " " + address.getAddress() + " ";
-        }
-        assertEquals(test, result);
+        assertThat(addressService.getAddresses(), contains(address2,  address3));
     }
 
     @Test
     public void deleteLastElementTest(){
         Address addressDelete = new Address((long) 3, "address3");
         addressService.delete(addressDelete);
-        String test = "1 address1" + " 2 address2 ";
-        String result = "";
-
-        for (Address address : addressService.findAll()){
-            result += address.getId() + " " + address.getAddress() + " ";
-        }
-        assertEquals(test, result);
+        assertThat(addressService.getAddresses(), contains(address1,  address2));
     }
 
     @Test
     public void deleteNonExistElementTest(){
         Address addressDelete = new Address((long) 4, "address4");
         addressService.delete(addressDelete);
-        String test = "1 address1 2 address2 3 address3 ";
-        String result = "";
-
-        for (Address address : addressService.findAll()){
-            result += address.getId() + " " + address.getAddress() + " ";
-        }
-        assertEquals(test, result);
+        assertThat(addressService.getAddresses(), contains(address1,  address2, address3));
     }
 
 }

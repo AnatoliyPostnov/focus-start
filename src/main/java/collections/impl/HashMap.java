@@ -1,7 +1,7 @@
 package collections.impl;
 
-import MyExceptions.MyMapException;
 import collections.Map;
+import exceptions.incorrectIndex;
 
 public class HashMap<K, V> implements Map<K, V> {
     private Integer size;
@@ -43,7 +43,7 @@ public class HashMap<K, V> implements Map<K, V> {
         if (tab[index] != null){
             return tab[index].value;
         }else{
-            throw new MyMapException();
+            throw new incorrectIndex();
         }
     }
 

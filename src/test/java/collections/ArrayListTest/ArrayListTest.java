@@ -1,7 +1,6 @@
 package collections.ArrayListTest;
 
-import MyExceptions.MyGetElementFromArrayListException;
-import MyExceptions.MyRemoveElementFromArrayListException;
+import exceptions.incorrectIndex;
 import collections.impl.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class ArrayListTest {
     }
 
     @Test
-    public void testGetElement() throws MyGetElementFromArrayListException {
+    public void testGetElement(){
         for (int i = 0; i < 100; ++i){
             assertEquals(java.util.Optional.of(CONST), java.util.Optional.of(testList.get(i)));
         }
@@ -44,19 +43,19 @@ public class ArrayListTest {
         assertEquals(133, testList.getArraySize());
     }
 
-    @Test(expected = MyGetElementFromArrayListException.class)
-    public void testGetOverSizeElementException() throws MyGetElementFromArrayListException {
+    @Test(expected = incorrectIndex.class)
+    public void testGetOverSizeElementException(){
         testList.get(100);
     }
 
 
-    @Test(expected = MyGetElementFromArrayListException.class)
-    public void testGetNegativeElementException() throws MyGetElementFromArrayListException {
+    @Test(expected = incorrectIndex.class)
+    public void testGetNegativeElementException(){
         testList.get(-1);
     }
 
-    @Test(expected = MyGetElementFromArrayListException.class)
-    public void testRemoveOneElementFromCenter() throws MyRemoveElementFromArrayListException, MyGetElementFromArrayListException {
+    @Test(expected = incorrectIndex.class)
+    public void testRemoveOneElementFromCenter(){
         for (int i = 0; i < 10; ++i){
             testList.add(Integer.valueOf(i).toString());
         }
@@ -66,21 +65,21 @@ public class ArrayListTest {
     }
 
     @Test
-    public void testRemoveLastElement() throws MyRemoveElementFromArrayListException {
+    public void testRemoveLastElement(){
         testList.remove(99);
         assertEquals(99, testList.getCursor());
         assertEquals(133, testList.getArraySize());
     }
 
     @Test
-    public void testRemoveFirstElement() throws MyRemoveElementFromArrayListException {
+    public void testRemoveFirstElement(){
         testList.remove(0);
         assertEquals(99, testList.getCursor());
         assertEquals(133, testList.getArraySize());
     }
 
     @Test
-    public void testRemoveAllElement() throws MyRemoveElementFromArrayListException {
+    public void testRemoveAllElement(){
         for (int i = 0; i < 100; ++i){
             testList.remove(0);
         }

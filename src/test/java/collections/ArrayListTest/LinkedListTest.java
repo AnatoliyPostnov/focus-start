@@ -1,6 +1,5 @@
 package collections.ArrayListTest;
 
-import MyExceptions.MyLinkedListException;
 import collections.impl.LinkedList;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +14,7 @@ public class LinkedListTest {
 
     @Before
     public void init(){
-        linkedList = new LinkedList<>(CONST_INT);
+        linkedList = new LinkedList<>();
     }
 
     @Test
@@ -27,17 +26,11 @@ public class LinkedListTest {
         linkedList.add(CONST_INT);
         linkedList.add(CONST_INT);
         linkedList.add(CONST_INT);
-        Iterator<Integer> iter = linkedList.iterator();
-        String test = "15 15 15 15 15 15 15 15 ";
-        String result = "";
-        while (iter.hasNext()){
-            result += iter.next().toString() + " ";
-        }
-        assertEquals(java.util.Optional.of(8), java.util.Optional.of(linkedList.getSize()));
+        assert(linkedList.equals("15 15 15 15 15 15 15 "));
     }
 
     @Test
-    public void getElementTest() throws MyLinkedListException {
+    public void getElementTest(){
         linkedList.add(1);
         linkedList.add(2);
         linkedList.add(3);
@@ -45,16 +38,15 @@ public class LinkedListTest {
         linkedList.add(5);
         linkedList.add(6);
         linkedList.add(7);
-        assertEquals(java.util.Optional.of(15), java.util.Optional.of(linkedList.get(0)));
-        assertEquals(java.util.Optional.of(1), java.util.Optional.of(linkedList.get(1)));
-        assertEquals(java.util.Optional.of(2), java.util.Optional.of(linkedList.get(2)));
-        assertEquals(java.util.Optional.of(3), java.util.Optional.of(linkedList.get(3)));
-        assertEquals(java.util.Optional.of(4), java.util.Optional.of(linkedList.get(4)));
-        assertEquals(java.util.Optional.of(7), java.util.Optional.of(linkedList.get(7)));
+        assertEquals(java.util.Optional.of(1), java.util.Optional.of(linkedList.get(0)));
+        assertEquals(java.util.Optional.of(2), java.util.Optional.of(linkedList.get(1)));
+        assertEquals(java.util.Optional.of(3), java.util.Optional.of(linkedList.get(2)));
+        assertEquals(java.util.Optional.of(4), java.util.Optional.of(linkedList.get(3)));
+        assertEquals(java.util.Optional.of(7), java.util.Optional.of(linkedList.get(6)));
     }
 
     @Test
-    public void addElementInCenterTest() throws MyLinkedListException {
+    public void addElementInCenterTest(){
         linkedList.add(1);
         linkedList.add(2);
         linkedList.add(3);
@@ -63,18 +55,12 @@ public class LinkedListTest {
         linkedList.add(6);
         linkedList.add(7);
         linkedList.add(100, 3);
-        String test = "15 1 2 100 3 4 5 6 7 ";
-        Iterator<Integer> iter = linkedList.iterator();
-        String result = "";
-        while (iter.hasNext()){
-            result += iter.next().toString() + " ";
-        }
-        assertEquals(test, result);
-        assertEquals(java.util.Optional.of(9), java.util.Optional.of(linkedList.getSize()));
+        assert(linkedList.equals("1 2 3 100 4 5 6 7 "));
+        assertEquals(java.util.Optional.of(8), java.util.Optional.of(linkedList.getSize()));
     }
 
     @Test
-    public void addElementAtBeginTest() throws MyLinkedListException {
+    public void addElementAtBeginTest(){
         linkedList.add(1);
         linkedList.add(2);
         linkedList.add(3);
@@ -83,18 +69,12 @@ public class LinkedListTest {
         linkedList.add(6);
         linkedList.add(7);
         linkedList.add(100, 0);
-        String test = "100 15 1 2 3 4 5 6 7 ";
-        Iterator<Integer> iter = linkedList.iterator();
-        String result = "";
-        while (iter.hasNext()){
-            result += iter.next().toString() + " ";
-        }
-        assertEquals(test, result);
-        assertEquals(java.util.Optional.of(9), java.util.Optional.of(linkedList.getSize()));
+        assert(linkedList.equals("100 1 2 3 4 5 6 7 "));
+        assertEquals(java.util.Optional.of(8), java.util.Optional.of(linkedList.getSize()));
     }
 
     @Test
-    public void addElementAtAndTest() throws MyLinkedListException {
+    public void addElementAtAndTest(){
         linkedList.add(1);
         linkedList.add(2);
         linkedList.add(3);
@@ -102,20 +82,14 @@ public class LinkedListTest {
         linkedList.add(5);
         linkedList.add(6);
         linkedList.add(7);
-        linkedList.add(100, 7);
-        linkedList.add(100, 7);
-        String test = "15 1 2 3 4 5 6 100 100 7 ";
-        Iterator<Integer> iter = linkedList.iterator();
-        String result = "";
-        while (iter.hasNext()){
-            result += iter.next().toString() + " ";
-        }
-        assertEquals(test, result);
-        assertEquals(java.util.Optional.of(10), java.util.Optional.of(linkedList.getSize()));
+        linkedList.add(100, 6);
+        linkedList.add(100, 6);
+        assert(linkedList.equals("1 2 3 4 5 6 100 100 7 "));
+        assertEquals(java.util.Optional.of(9), java.util.Optional.of(linkedList.getSize()));
     }
 
     @Test
-    public void removeElementTest() throws MyLinkedListException {
+    public void removeElementTest(){
         linkedList.add(1);
         linkedList.add(2);
         linkedList.add(3);
@@ -126,18 +100,20 @@ public class LinkedListTest {
         linkedList.remove(3);
         linkedList.remove(3);
         linkedList.remove(2);
-        String test = "15 1 5 6 7 ";
-        Iterator<Integer> iter = linkedList.iterator();
-        String result = "";
-        while (iter.hasNext()){
-            result += iter.next().toString() + " ";
-        }
-        assertEquals(test, result);
-        assertEquals(java.util.Optional.of(5), java.util.Optional.of(linkedList.getSize()));
+        assert(linkedList.equals("1 2 6 7 "));
+        assertEquals(java.util.Optional.of(4), java.util.Optional.of(linkedList.getSize()));
     }
 
     @Test
-    public void removeElementAtBeginTest() throws MyLinkedListException {
+    public void emptyListTest(){
+        Iterator iter = linkedList.iterator();
+        if (iter.hasNext()) {
+            iter.next();
+        }
+    }
+
+    @Test
+    public void removeElementAtBeginTest(){
         linkedList.add(1);
         linkedList.add(2);
         linkedList.add(3);
@@ -148,18 +124,12 @@ public class LinkedListTest {
         linkedList.remove(0);
         linkedList.remove(0);
         linkedList.remove(0);
-        String test = "3 4 5 6 7 ";
-        Iterator<Integer> iter = linkedList.iterator();
-        String result = "";
-        while (iter.hasNext()){
-            result += iter.next().toString() + " ";
-        }
-        assertEquals(test, result);
-        assertEquals(java.util.Optional.of(5), java.util.Optional.of(linkedList.getSize()));
+        assert(linkedList.equals("4 5 6 7 "));
+        assertEquals(java.util.Optional.of(4), java.util.Optional.of(linkedList.getSize()));
     }
 
     @Test
-    public void removeElementAtEndTest() throws MyLinkedListException {
+    public void removeElementAtEndTest(){
         linkedList.add(1);
         linkedList.add(2);
         linkedList.add(3);
@@ -167,16 +137,10 @@ public class LinkedListTest {
         linkedList.add(5);
         linkedList.add(6);
         linkedList.add(7);
-        linkedList.remove(7);
         linkedList.remove(6);
         linkedList.remove(5);
-        String test = "15 1 2 3 4 ";
-        Iterator<Integer> iter = linkedList.iterator();
-        String result = "";
-        while (iter.hasNext()){
-            result += iter.next().toString() + " ";
-        }
-        assertEquals(test, result);
-        assertEquals(java.util.Optional.of(5), java.util.Optional.of(linkedList.getSize()));
+        linkedList.remove(4);
+        assert(linkedList.equals("1 2 3 4 "));
+        assertEquals(java.util.Optional.of(4), java.util.Optional.of(linkedList.getSize()));
     }
 }

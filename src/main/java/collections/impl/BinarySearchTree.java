@@ -1,8 +1,9 @@
 package collections.impl;
 
-import MyExceptions.MyBinarySearchTreeIteratorExceprion;
-
 import java.util.Iterator;
+import java.util.Objects;
+import java.util.TreeSet;
+
 // monster mode сделать на объъектах с дженериками
 public class BinarySearchTree implements Iterable {
     private Node head;
@@ -19,6 +20,26 @@ public class BinarySearchTree implements Iterable {
         currentDepth = depth;
         sizeTree = 1;
         riseTree = true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        TreeSet<Integer> forTestTreeSet = (TreeSet<Integer>) o;
+        Iterator forTestIter = forTestTreeSet.iterator();
+        Iterator thisIter = iterator();
+        while(thisIter.hasNext()){
+            if (!(forTestIter.hasNext() && forTestIter.next() == thisIter.next())){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(head, currentNode, depth, currentDepth, sizeTree, riseTree);
     }
 
     class Node {

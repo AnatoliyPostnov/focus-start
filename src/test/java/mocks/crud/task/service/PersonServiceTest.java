@@ -22,8 +22,8 @@ public class PersonServiceTest {
     @Mock
     PersonRepository personRepository = mock(PersonRepository.class);
 
-    AddressService addressService;
-    PersonService personService;
+    private AddressService addressService;
+    private PersonService personService;
 
     @Before
     public  void init() {

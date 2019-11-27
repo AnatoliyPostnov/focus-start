@@ -1,8 +1,8 @@
 package mocks.crud.task.service;
 
-import mocks.crud.task.MyExceptions.AddressWasNotFound;
-import mocks.crud.task.MyExceptions.DataBaseAlreadyContainsAddressWithSpecifiedId;
-import mocks.crud.task.MyExceptions.UpdateAddressWasNotFound;
+import mocks.crud.task.exceptions.AddressWasNotFound;
+import mocks.crud.task.exceptions.DataBaseAlreadyContainsAddressWithSpecifiedId;
+import mocks.crud.task.exceptions.UpdateAddressWasNotFound;
 import mocks.crud.task.model.Address;
 import mocks.crud.task.repository.CrudRepository;
 
@@ -66,5 +66,9 @@ public class AddressService implements CrudRepository<Long, Address> {
                 addresses.remove(addresses.get(i));
             }
         }
+    }
+
+    public List<Address> getAddresses(){
+        return addresses;
     }
 }

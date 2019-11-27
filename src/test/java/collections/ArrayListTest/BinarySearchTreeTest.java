@@ -4,7 +4,7 @@ import collections.impl.BinarySearchTree;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Iterator;
+import java.util.*;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -81,13 +81,8 @@ public class BinarySearchTreeTest {
         binarySearchTree.add(13);
         binarySearchTree.add(14);
         binarySearchTree.add(15);
-        Iterator iter = binarySearchTree.iterator();
-        String test = "7 8 9 10 11 12 13 14 15 ";
-        String result = "";
-        while(iter.hasNext()){
-            result += iter.next().toString() + " ";
-        }
-        assertEquals(test, result);
+        Set<Integer> testSet = new TreeSet<>(Arrays.asList(7, 8, 9, 10, 11, 12, 13, 14, 15));
+        assert(binarySearchTree.equals(testSet));
         assertEquals(5, binarySearchTree.getDepth());
         assertEquals(1, binarySearchTree.getCurrentDepth());
     }
@@ -106,13 +101,8 @@ public class BinarySearchTreeTest {
         binarySearchTree.add(3);
         binarySearchTree.add(15);
         binarySearchTree.add(30);
-        Iterator iter = binarySearchTree.iterator();
-        String test = "1 2 3 4 5 6 7 8 9 10 15 30 ";
-        String result = "";
-        while(iter.hasNext()){
-            result += iter.next().toString() + " ";
-        }
-        assertEquals(test, result);
+        Set<Integer> testSet = new TreeSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 30));
+        assert(binarySearchTree.equals(testSet));
         assertEquals(5, binarySearchTree.getDepth());
         assertEquals(1, binarySearchTree.getCurrentDepth());
     }
@@ -124,13 +114,8 @@ public class BinarySearchTreeTest {
         binarySearchTree.add(8);
         binarySearchTree.add(7);
         binarySearchTree.add(6);
-        Iterator iter = binarySearchTree.iterator();
-        String test = "5 6 7 8 9 10 ";
-        String result = "";
-        while(iter.hasNext()){
-            result += iter.next().toString() + " ";
-        }
-        assertEquals(test, result);
+        Set<Integer> testSet = new TreeSet<>(Arrays.asList(5, 6, 7, 8, 9, 10));
+        assert(binarySearchTree.equals(testSet));
         assertEquals(5, binarySearchTree.getDepth());
         assertEquals(1, binarySearchTree.getCurrentDepth());
     }
@@ -140,13 +125,9 @@ public class BinarySearchTreeTest {
         binarySearchTree.add(5);
         binarySearchTree.add(11);
         binarySearchTree.reverse();
-        Iterator iter = binarySearchTree.iterator();
-        String test = "11 10 5 ";
-        String result = "";
-        while(iter.hasNext()){
-            result += iter.next().toString() + " ";
-        }
-        assertEquals(test, result);
+        Set<Integer> testSet = new TreeSet<>(Comparator.reverseOrder());
+        testSet.addAll(Arrays.asList(11, 10, 5));
+        assert(binarySearchTree.equals(testSet));
     }
 
     @Test
@@ -155,13 +136,9 @@ public class BinarySearchTreeTest {
         binarySearchTree.add(15);
         binarySearchTree.add(11);
         binarySearchTree.reverse();
-        Iterator iter = binarySearchTree.iterator();
-        String test = "15 11 10 5 ";
-        String result = "";
-        while(iter.hasNext()){
-            result += iter.next().toString() + " ";
-        }
-        assertEquals(test, result);
+        Set<Integer> testSet = new TreeSet<>(Comparator.reverseOrder());
+        testSet.addAll(Arrays.asList(15, 11, 10, 5));
+        assert(binarySearchTree.equals(testSet));
     }
 
     @Test
@@ -179,12 +156,8 @@ public class BinarySearchTreeTest {
         binarySearchTree.add(15);
         binarySearchTree.add(30);
         binarySearchTree.reverse();
-        Iterator iter = binarySearchTree.iterator();
-        String test = "30 15 10 9 8 7 6 5 4 3 2 1 ";
-        String result = "";
-        while(iter.hasNext()){
-            result += iter.next().toString() + " ";
-        }
-        assertEquals(test, result);
+        Set<Integer> testSet = new TreeSet<>(Comparator.reverseOrder());
+        testSet.addAll(Arrays.asList(30, 15, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1));
+        assert(binarySearchTree.equals(testSet));
     }
 }
